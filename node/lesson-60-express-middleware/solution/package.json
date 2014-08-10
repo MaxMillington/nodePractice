@@ -1,0 +1,10 @@
+{
+  "name": "express-auth",
+  "dependencies": {
+    "express": "4.6.0",
+    "express-session": "1.6.5",
+    "morgan": "1.1.1",
+    "body-parser": "1.4.3",
+    "method-override": "2.1.1"
+  }
+}

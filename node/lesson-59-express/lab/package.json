@@ -1,0 +1,10 @@
+{
+  "name" : "todo",
+  "dependencies" : {
+    "express" : "4.5.1",
+    "body-parser": "1.4.2",
+    "method-override": "2.1.0",
+    "errorhandler": "1.0.0",
+    "jade": "1.3.1"
+  }
+}

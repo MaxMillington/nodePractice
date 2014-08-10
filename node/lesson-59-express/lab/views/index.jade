@@ -1,0 +1,12 @@
+extends ../layouts/default
+
+block content
+  
+  #list
+    form(action='/create', method='post', accept-charset='utf-8')
+      .item-new
+        input(class='input', type='text', name='content')
+    - each todo in todos
+      .item
+        a(class='update-link', href='/edit/#{todo.id}', title='Update this todo item') #{todo.content}
+        a(class='del-btn', href='/delete/#{todo.id}', title='Delete this todo item') Delete

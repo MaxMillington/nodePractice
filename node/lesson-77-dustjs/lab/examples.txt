@@ -1,0 +1,277 @@
+Opening Example
+---------------
+
+Template:
+
+{title}{~n}
+<ul>
+{#names}
+  <li>{name}</li>{~n}
+  {/names}
+</ul>
+
+Model:
+
+{
+ 'title': 'Famous People', 
+ 'names': [{ 'name': 'Larry' },
+           { 'name': 'Curly' },
+           { 'name': 'Moe' }]
+}
+
+
+Context Example
+---------------
+
+Template:
+
+root.name: {name}{~n}
+{#A}
+  A.name: {name}{~n}
+  {#B}
+    B.name: {name}{~n}
+  {/B}
+{/A}
+
+Model:
+
+{
+  'name': 'root',
+  'A':{
+    'name':'Albert',
+    'B':{
+      'name':'Bob'
+    }
+  }
+}
+
+
+
+Array Iteration Example
+-----------------------
+
+Template:
+
+{title}{~n}
+{#names}
+  {$idx}. {name}{~n}
+{/names}
+
+Model:
+
+{
+ 'title': 'Famous People', 
+ 'names': [{ 'name': 'Larry' },
+           { 'name': 'Curly' },
+           { 'name': 'Moe' }]
+}
+
+
+Searching Context Stack Example
+-------------------------------
+
+Template:
+
+root.name: {name}{~n}
+{#A}
+  A.name: {name}{~n}
+  {#B}
+    B.name: {name}{~n}
+    root.alt: {alt}{~n}
+  {/B}
+{/A}
+
+Model:
+
+{
+  'name': 'root',
+  'alt': 'root2',
+  'A':{
+      'name':'Albert',
+      'B':{
+         'name':'Bob'
+      }
+   }
+}
+
+
+
+Explicit Contexts Example
+-------------------------
+
+Template:
+
+{#B:A}
+  Aname: {Aname}{~n}
+  RootName: {rootName}
+{/B}
+
+Model:
+
+{
+  'rootName': 'name of root',
+  'Aname': 'alt name of root',
+  'A': {
+    'Aname': 'name of A'
+  },
+  'B': {
+    'Bname': 'name of B'
+  }
+}
+
+
+
+Parameter Example
+-----------------
+
+Template:
+
+{#person root="PropertyRoot"
+         nameRef=root
+         tagRef="{root}"}
+NameRef: {nameRef}, TagRef: {tagRef}
+{/person}
+
+Model:
+
+{
+  'root': 'Subject',
+  'person': {
+    'name': 'Larry',
+    'age': 45
+  }
+}
+
+
+Else example
+------------
+
+Template:
+
+{#friends}
+  {name}, {age}{~n}
+{:else}
+  You have no friends!
+{/friends}
+
+Model:
+
+{
+  friends: [
+    { name: 'Moe', age: 37 },
+    { name: 'Larry', age: 39 },
+    { name: 'Curly', age: 35 }
+  ]
+}
+
+
+Logic Example
+-------------
+
+Template:
+
+{?names}
+{title}{~n}
+<ul>
+{#names}
+  <li>{name}</li>{~n}
+{/names}
+</ul>
+{/names}
+
+Model:
+
+{
+ 'title': 'Famous People', 
+ 'names': [{ 'name': 'Larry' },
+           { 'name': 'Curly' },
+           { 'name': 'Moe' }]
+}
+
+
+Select Example
+--------------
+
+Template:
+
+{#people}{name}, 
+{@select key=friends}
+{@lt value=1}poor soul{/lt}
+{@lt value=3}get out more!{/lt}
+{@default}you're lucky!{/default}
+{/select}{~n}
+{/people}
+
+Model:
+
+{
+  'people':
+    [{ 'name': 'Larry', 'friends': 5 },
+     { 'name': 'Curly', 'friends': 2 },
+     { 'name': 'Moe', 'friends': 0 }]
+}
+
+
+Math Example
+------------
+
+Template:
+
+{title}{~n}
+{#names}
+  {@math key=$idx
+         method="add"
+         operand=1}. {name}{~n}
+{/names}
+
+Model:
+
+{
+ 'title': 'Famous People', 
+ 'names': [{ 'name': 'Larry' },
+           { 'name': 'Curly' },
+           { 'name': 'Moe' }]
+}
+
+
+sep Example
+-----------
+
+Template:
+
+{title} here today:
+{#names}
+  {name}{@sep}, {/sep}
+{/names}
+
+Model:
+
+{
+ 'title': 'Famous People', 
+ 'names': [{ 'name': 'Larry' },
+           { 'name': 'Curly' },
+           { 'name': 'Moe' }]
+}
+
+
+contextDump Example
+-------------------
+
+Template:
+
+{#B:A}
+  {@contextDump key="current" to="output"/}
+{/B}
+
+Model:
+
+{
+  'rootName': 'name of root',
+  'Aname': 'alt name of root',
+  'A': {
+    'Aname': 'name A'
+  },
+  'B': {
+    'Bname': 'name B'
+  }
+}

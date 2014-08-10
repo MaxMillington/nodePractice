@@ -1,0 +1,2 @@
+{! Create your Dust template in here. !}
+<h1>Hello {name}!</h1>

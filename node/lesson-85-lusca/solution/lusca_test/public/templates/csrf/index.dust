@@ -1,0 +1,14 @@
+{>"layouts/master" /}
+
+{<body}
+  <h1>{@pre type="content" key="greetings"/}</h1>
+    <h2>{@pre type="content" key="form"/}</h2>
+    <form method="post">
+      Name: <input type="text" name="name" value="{name}" size="100"/>
+      <br/>
+      CSRF Token: <input type="text" name="_csrf" value="{_csrf}" size="100"/>
+      <br/>
+      <input type="submit" value="Submit"/>
+    </form>
+{/body}
+

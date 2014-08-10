@@ -1,0 +1,17 @@
+extends ../layouts/default
+
+block content
+  #list
+    form(action='/create', method='post', accept-charset='utf-8')
+      .item-new
+        input(class='input', type='text', name='content')
+    - each todo in todos
+      - if (todo.id == current)
+        .item-new
+          form(class='update-form', action='/update/#{todo.id}', method='post', accept-charset='utf-8')
+            input(class='update-input', type='text', name='content', value='#{todo.content}')
+          a(class='del-btn-edit', href='/delete/#{todo.id}', title='Delete this todo item') Delete
+      - else
+        .item
+          a(class='update-link', href='/edit/#{todo.id}', title='Update this todo item') #{todo.content}
+          a(class='del-btn', href='/delete/#{todo.id}', title='Delete this todo item') Delete
