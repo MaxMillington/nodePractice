@@ -1,0 +1,33 @@
+<html>{~n}
+<head>{~n}
+<title>{@pre type="content" key="quiz.title"/}</title>{~n}
+</head>{~n}
+<body bgcolor=#ffffff>{~n}
+{~n}
+<h3>{quizName}</h3>{~n}
+{~n}
+<form name="{quizId}" method="post" action="{submitTo}" enctype="text/plain">{~n}
+{~n}
+<p>{intro}</p>{~n}
+
+{#questions}
+<p>{@math key=$idx method="add" operand=1/}. {questionText}<br />{~n}
+  {@eq key=answerType value="input"}
+    <textarea name="{id}" rows="4" cols="50"></textarea>{~n}
+  {:else}
+    {#answers questionId=id answerTypeParam=answerType}
+      <input type="{@eq key=answerTypeParam value="single"}radio{:else}checkbox{/eq}" name="{questionId}"
+                 value="{id}" />{answerText}<br />{~n}
+    {/answers}
+  {/eq}
+</p>{~n}
+{:else}
+  <h4>You passed!</h4>{~n}
+{/questions}
+
+<br />{~n}
+    <input type="submit" value="Send Form" />{~n}
+    <input type="reset" value="Clear Form" />{~n}
+</form>{~n}
+</body>{~n}
+</html>{~n}

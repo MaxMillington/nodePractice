@@ -1,0 +1,100 @@
+{
+
+    "express": {
+        "view cache": false,
+        "view engine": "js",
+        "views": "path:./.build/templates"
+    },
+
+    "view engines": {
+        "js": {
+            "module": "engine-munger",
+            "renderer": {
+                "method": "js",
+                "arguments": [
+                    { "cache": true },
+                    {
+                        "views": "config:express.views",
+                        "view engine": "config:express.view engine",
+                        "specialization": "config:specialization",
+                        "i18n": "config:i18n"
+                    }
+                ]
+            }
+        }
+    },
+    "bundle engine": "dust",
+    "databaseConfig" : {
+        "host" : "localhost", 
+        "database:" : "test"
+    },
+
+    "i18n": {
+        "contentPath": "path:./locales",
+        "fallback": "en-US"
+    },
+    "paypalConfig": {
+        "host": "api.sandbox.paypal.com",
+        "port": "",
+        "client_id": "EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM",
+        "client_secret": "EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM"
+    }, 
+
+    "middleware": {
+
+        "static": {
+            "module": {
+                "arguments": [ "path:./.build" ]
+            }
+        },
+
+        "router": {
+            "module": {
+                "arguments": [{ "directory": "path:./controllers" }]
+            }
+        },
+        "method-override": {
+            "enabled": true,
+            "priority": 75,
+            "module": {
+            "name": "path:./lib/method-override",
+            "arguments": [ "_method" ]
+            }
+        },
+        "locale": {
+            "priority": 95,
+            "enabled": true,
+            "module": {
+            "name": "path:./lib/locale"
+            }
+        },
+        
+        "expressView": {
+            "priority": 100,
+            "enabled": true,
+            "module": {
+                "name": "engine-munger/lib/expressView"
+            }
+        },
+        
+
+        "fileNotFound": {
+            "enabled": true,
+            "priority": 130,
+            "module": {
+                "name": "kraken-js/middleware/404",
+                "arguments": [ "errors/404" ]
+            }
+        },
+
+        "serverError": {
+            "enabled": true,
+            "priority": 140,
+            "module": {
+                "name": "kraken-js/middleware/500",
+                "arguments": [ "errors/500" ]
+            }
+        }
+
+    }
+}
