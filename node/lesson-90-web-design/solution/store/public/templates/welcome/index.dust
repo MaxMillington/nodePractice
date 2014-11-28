@@ -1,0 +1,7 @@
+{>"layouts/master" /}
+
+{<body}
+    <h1>{@pre type="content" key="greeting"/}</h1>
+    <h2>{welcome}</h2>
+    <a href="store">Go To Store</a>
+{/body}
