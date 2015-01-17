@@ -18,7 +18,7 @@ module.exports = function(router) {
         console.log(err);
       }
       var todos =  todos.map(modelTransform);
-      var model = { todos: todos };
+      var model = { todos: todos, name: 'clay' };
       res.render('todos', model);
     });
   });

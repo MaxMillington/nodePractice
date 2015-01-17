@@ -1,0 +1,10 @@
+<section>
+<ul class="nav nav-pills">
+    <li><a href data-ng-click="tab.set(1)">Austin</a></li>
+    <li><a href data-ng-click="tab.set(2)">Houston</a></li>
+    <li><a href data-ng-click="tab.set(3)">Dallas</a></li>
+</ul>
+<div class="panel" ng-show="tab.isSelected(1)">Deep in the heart of Texas</div>
+<div class="panel" ng-show="tab.isSelected(2)">On the muggy coast</div>
+<div class="panel" ng-show="tab.isSelected(3)">Up North, close to the Yankees</div>
+</section>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="todos">
+  <head>
+      <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+  </head>
+<body style="padding: 1em">
+
+<h1>TODO's Visited</h1>
+
+<section ng-controller="TodoController as todoCntlr">
+
+    <form name="todoForm" ng-submit="todoCntlr.addTodo()">
+        <blockquote>
+            <h3>Number of todos is {{todoCntlr.todos.length}}</h3>
+            <b>Item: {{todoCntlr.todo.content}}</b>
+        </blockquote>
+
+        <input ng-model="todoCntlr.todo.content" type="text" />
+
+    </form>
+
+<script src="js/angular.min.js"></script>
+<script src="js/todos.js"></script>
+</body>
+</html>

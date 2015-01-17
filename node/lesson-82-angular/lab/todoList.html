@@ -1,0 +1,19 @@
+<section>
+
+    <form name="todoForm"
+          ng-submit="todoForm.$valid && todoCntlr.addTodo()"
+          novalidate>
+        <blockquote>
+            <h3>Number of todos is {{todoCntlr.todos.length}}</h3>
+            <div ng-repeat="todo in todoCntlr.todos">
+                <b>Item {{$index + 1}}: {{todo.content}}</b>
+            </div>
+        </blockquote>
+
+        <input ng-model="todoCntlr.todo.content" type="text"
+               required/>
+    </form>
+
+</section>
+
+

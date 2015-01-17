@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="panel">
+  <head>
+      <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+  </head>
+<body style="padding: 1em">
+
+<h1>How y'all doin?</h1>
+
+<section ng-init="tab = 1">
+<ul class="nav nav-pills">
+    <li><a href ng-click="tab = 1">Austin</a></li>
+    <li><a href ng-click="tab = 2">Houston</a></li>
+    <li><a href ng-click="tab = 3">Dallas</a></li>
+</ul>
+<div class="panel" ng-show="tab === 1">Deep in the heart of Texas</div>
+<div class="panel" ng-show="tab === 2">On the muggy coast</div>
+<div class="panel" ng-show="tab === 3">Up North, close to the Yankees</div>
+</section>
+
+<script src="js/angular.min.js"></script>
+<script src="js/panel.js"></script>
+</body>
+</html>
