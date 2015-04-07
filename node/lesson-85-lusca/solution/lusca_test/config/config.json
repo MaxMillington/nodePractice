@@ -76,7 +76,7 @@
 
         "appsec": {
             "enabled": true,
-            "priority": 100,
+            "priority": 110,
             "module": {
                 "name": "lusca",
                 "arguments": [
