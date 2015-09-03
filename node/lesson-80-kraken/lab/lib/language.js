@@ -10,6 +10,7 @@ module.exports = function () {
     if (language) {
       res.locals.context = res.locals.context || {};
       res.locals.context.locality = language;
+      res.locals.locality = language;
     }
 
     next();

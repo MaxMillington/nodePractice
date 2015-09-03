@@ -13,7 +13,7 @@ function computePrimes(limit, callback) {
 
   var primes = [ 1, 2 ];
   var factor = 2;
-  var batchSize = 100;
+  var batchSize = 10000;
   var batchItem = 3;
 
   function computePrimeBatch(candidate) {
