@@ -45,18 +45,17 @@ server = net.createServer(function (socket) {
         // LS should return the directory listing of the current directory
         // PWD should return the name of the current directory
         // Feel free to create a function handling each command.
-        switch (data) {
-            case 'ls':
-                ls(socket);
-                break;
-            case 'pwd':
-                pwd(socket);
-                break;
-            case 'quit':
-                quit(socket);
-                break;
-            default:
-                socket.write('Invalid commnad: ' + data + "\n");
+        if (data.match(/ls.*/i)) {
+            ls (socket, data);
+        }
+        else if (data.match(/pwd.*/i)) {
+            pwd(socket, data);
+        }
+        else if (data.match(/quit/i)) {
+            quit(socket, data);
+        }
+        else {
+            socket.write('Invalid commnad: ' + data + "\n");
         }
     });
 
