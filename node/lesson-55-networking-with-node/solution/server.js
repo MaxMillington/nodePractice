@@ -1,106 +1,76 @@
 'use strict';
 
 var net = require('net');
+var fs = require('fs');
 
 var PORT = 1986;
-var sockets = [];
 var server;
 
-function writeln(socket, line) {
-  socket.write(line + '\r\n');
+function ls(socket) {
+    console.log('ls function called.');
+    socket.write('ls called \n');
+    fs.readdir('.', function (err, files) {
+        if (err) return console.log(err);
+        files.forEach(function (file) {
+            socket.write(file + '\n');
+        });
+    });
 }
 
-// on socket close, remove socket from array
-function onSocketEnd(socket) {
-  var i = sockets.indexOf(socket);
-  if (i !== -1) {
-    sockets.splice(i, 1);
-  }
-  console.log('clients: ' + sockets.length);
+function pwd(socket) {
+    console.log('pwd function called.');
+    socket.write('pwd called \n');
+    fs.realpath('.', function (err, path) {
+        if (err) return console.log(err);
+        socket.write(path + '\n');
+    });
 }
 
-// shutdown given socket or whole server
-function shutdown(socket) {
-  var i;
-  if (socket) {
-    i = sockets.indexOf(socket);
-    if (i !== -1) {
-      socket.end();
-      sockets.splice(i, 1);
-    }
-    return;
-  }
-
-  // else shutdown whole server
-  server.close(function onClosed() {
-    console.log("server shut down");
-  });
-
-  for (i = 0; i < sockets.length; i++) {
-    sockets[i].end();
-  }
-  sockets = [];
-}
-
-// handle incoming data
-function onSocketData(data, socket) {
-  data = data.toString();
-  if ('/shutdown' === data.toLowerCase().trim()) {
-    return shutdown();
-  }
-  if ('/quit' === data.toLowerCase().trim()) {
-    return shutdown(socket);
-  }
-  if (data.toLowerCase().indexOf('/name:', 0) !== -1) {
-    socket.username = data.split(':')[1].trim();
-    socket.username = socket.username || 'You';
-    return socket.write("Ok, I'll now call you " + socket.username + '!\r\n');
-  }
-  socket.write(socket.username + ' said: ' + data);
-}
-
-// when client is connected, append socket to array, add socket end listener,
-// add socket data listener, write instructions, store initial username on
-// socket
-function onClientConnected(socket) {
-  sockets.push(socket);
-  console.log('client connected; now ' + sockets.length);
-  socket.on('end', function onEnd() {
-    onSocketEnd(socket);
-  });
-  socket.on('data', function onData(data) {
-    onSocketData(data, socket);
-  });
-  writeln(socket, 'Hello.  Usage:');
-  writeln(socket, '/name:yourName to tell me your name');
-  writeln(socket, '/quit to quit');
-  writeln(socket, '/shutdown to shutdown the server');
-  writeln(socket, "otherwise I'll just echo 'You said: ' plus what you entered!");
-
-  socket.username = 'You';
+function quit(socket) {
+    console.log('quit function called.');
+    socket.end('quit called. \n');
 }
 
 // create server object
-server = net.createServer(onClientConnected);
+server = net.createServer(function (socket) {
+
+    console.log('client connected, address = ' + socket.remoteAddress + ' , port = ' + socket.remotePort);
+
+    socket.on('data', function onData(data) {
+        data = data.toString().trim();
+
+        console.log('Received data: ' + data);
+
+        // process the command lines
+        // LS should return the directory listing of the current directory
+        // PWD should return the name of the current directory
+        // Feel free to create a function handling each command.
+        switch (data) {
+            case 'ls':
+                ls(socket);
+                break;
+            case 'pwd':
+                pwd(socket);
+                break;
+            case 'quit':
+                quit(socket);
+                break;
+            default:
+                socket.write('Invalid commnad: ' + data + "\n");
+        }
+    });
+
+    socket.write('Welcome to the FTP Server. Commands are LS, PWD, etc.\n');
+
+});
 
 // handle server errors
 server.on('error', function onError(e) {
-  console.log(e);
-
-  if (e.code === 'EADDRINUSE') {
-    console.log('Port ' + PORT + ' in use.  Retrying...');
-    return setTimeout(function onTimeout() {
-      server.listen(PORT);
-    }, 1000);
-  }
-
-  throw e;
+    console.log(e);
+    throw e;
 });
 
-// echo message when server is successfully listening
-function onServerPortBound() {
-  console.log('server listening on port ' + PORT);
-}
-
 // start listening on the server port
-server.listen(PORT, onServerPortBound);
+server.listen(PORT, function () {
+    console.log('server listening on port ' + PORT);
+});
