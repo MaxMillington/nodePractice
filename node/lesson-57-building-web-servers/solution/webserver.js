@@ -2,61 +2,131 @@
 
 var http = require('http');
 var url = require('url');
+var fs = require('fs');
+var querystring = require('querystring');
 
-function handleGet(request, response) {
-  var contentType;
-  var body;
-  if (request.headers.accept && request.headers.accept.indexOf('text/html') > -1) {
-    var params = url.parse(request.url, true).query;
-    var style = params.style || 'h1';
-    contentType = 'text/html';
-    body = '<' + style + '>Hello World</' + style + '>\n';
-  } else {
-    contentType = 'text/plain';
-    body = 'Hello World\n';
-  }
-  response.writeHead(200, {
-    'Content-Type': contentType
-  });
-  response.end(body);
-}
+var PORT = 3000;
+var server;
 
-function writePostResponse(response, names) {
-  var body = '';
+var responseFiles = {};
+var fileNames = ['index.html', 'login.html', 'success.html', 'failure.html'];
 
-  names.forEach(function onEach(it) {
-    body += 'Hello ' + it + '\n';
-  });
+/**
+ * Cache the html files to have fewer async calls later on.
+ * Store the files in the object, responseFiles[filename] = contents
+ */
 
-  response.writeHead(200, {
-    'Content-Type': 'text/plain'
-  });
-  response.end(body);
-}
-
-function handlePost(request, response) {
-  var s = '';
-  request.on('data', function onData(chunk) {
-    s += chunk;
-  });
-  request.on('end', function onEnd(chunk) {
-    writePostResponse(response, JSON.parse(s));
-  });
-}
-
-var server = http.createServer(function onRequest(request, response) {
-  switch (request.method) {
-  case 'GET':
-    handleGet(request, response);
-    break;
-  case 'POST':
-    handlePost(request, response);
-    break;
-  default:
-    console.log('Unsupported request method: ' + request.method);
-  }
+fileNames.forEach(function (filename) {
+    fs.readFile(filename, function (err, data) {
+        if (err) throw err;
+        responseFiles[filename] = data;
+    });
 });
 
-server.listen(3000);
+/**
+ * Render the html page to the client.  NOTE: the page should already have been
+ * cached above.
+ *
+ * @param response
+ * @param filename
+ */
 
-console.log('Server running at http://localhost:3000/');
+function render(response, filename) {
+    response.writeHead(200, {'Content-Type': 'text/html'});
+    response.end(responseFiles[filename]);
+}
+
+
+/**
+ * Get the body of the request.  Assumes the method is POST and parses the
+ * body to get the FORM data.
+ *
+ * @param request
+ * @param callback -- function(formParams)
+ */
+
+function getBody(request, callback) {
+    var contents = '';
+    request.on('data', function (data) {
+        contents += data.toString();
+    });
+    request.on('end', function () {
+        callback(querystring.parse(contents));
+    });
+}
+
+// create a web (http) server
+//    parse the input request url
+//    if the input is
+//      GET /         -- send the file, 'index.html'
+//      GET /login    -- send the file, 'login.html'
+//      GET /logout   -- send the file, 'index.html'
+//      POST /login   -- if the username and password are not empty, send the file 'success.html',
+//                    -- else send the file, 'failure.html'
+//
+
+server = http.createServer(function (request, response) {
+        var params = url.parse(request.url, true);
+        var method = request.method;
+        var path = params.pathname;
+        var body = {};
+        console.log('Method = ' + method + ', path = ' + path);
+
+        if (method === 'GET') {
+
+            switch (path) {
+                case '/':
+                    render(response, 'index.html');
+                    break;
+                case '/login':
+                    render(response, 'login.html');
+                    break;
+                case '/logout':
+                    render(response, 'index.html');
+                    break;
+                default:
+                    response.writeHead(500);
+                    response.end("GET: Unknown path: " + path);
+                    break;
+            }
+        }
+        else if (method === 'POST') {
+            getBody(request, function (data) {
+                body = data;
+
+                switch (path) {
+                    case '/login':
+                        if (body && body.username && body.password) {
+                            render(response, 'success.html');
+                        }
+                        else {
+                            render(response, 'failure.html');
+                        }
+                        break;
+                    default:
+                        response.writeHead(500);
+                        response.end("POST: Unknown path: " + path);
+                        break;
+                }
+            });
+
+        }
+        else {
+            response.writeHead(500);
+            response.end("ERROR: unknown method, " + method);
+        }
+
+    }
+)
+
+// on the server 'error' event, display the error on the console
+server.on('error', function (err) {
+    console.log(err);
+});
+
+// tell the server to listen to the port and display a console message when it is ready
+
+server.listen(PORT, function (err) {
+    if (err) return console.log(err);
+    console.log("Server listening on port, " + PORT);
+});
