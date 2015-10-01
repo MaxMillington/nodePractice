@@ -71,7 +71,6 @@ server = http.createServer(function (request, response) {
         console.log('Method = ' + method + ', path = ' + path);
 
         if (method === 'GET') {
-
             switch (path) {
                 case '/':
                     render(response, 'index.html');
