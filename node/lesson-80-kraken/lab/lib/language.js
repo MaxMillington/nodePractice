@@ -8,8 +8,6 @@ module.exports = function () {
     
     //Set the locality for this response. The template will pick the appropriate bundle
     if (language) {
-      res.locals.context = res.locals.context || {};
-      res.locals.context.locality = language;
       res.locals.locality = language;
     }
 

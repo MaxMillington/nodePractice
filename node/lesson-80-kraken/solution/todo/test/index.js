@@ -5,10 +5,11 @@
 
 var kraken = require('kraken-js'),
     express = require('express'),
+    path = require('path'),
     request = require('supertest');
 
 
-describe('/', function () {
+describe('index', function () {
 
     var app, mock;
 
@@ -17,7 +18,7 @@ describe('/', function () {
         app = express();
         app.on('start', done);
         app.use(kraken({
-            basedir: process.cwd()
+            basedir: path.resolve(__dirname, '..')
         }));
 
         mock = app.listen(1337);
@@ -35,7 +36,9 @@ describe('/', function () {
             .get('/')
             .expect(200)
             .expect('Content-Type', /html/)
-            .expect(/Hello, /)
+            
+                .expect(/Hello, /)
+            
             .end(function (err, res) {
                 done(err);
             });
