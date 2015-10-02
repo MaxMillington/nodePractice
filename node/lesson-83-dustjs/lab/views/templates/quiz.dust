@@ -16,6 +16,7 @@
     <li>If the question has 'answerType of input', then use a textarea to get the data</li>
     <li>If the question has 'answerType of single', then use a radio input type</li>
     <li>if the question has 'answerType of multi', then use a checkbox input type</li>
+    <li>NOTE: the 'name' attribute will be the same as the question id</li>
 </ul>
 <br />
     <input type="submit" value="Send Form" />
