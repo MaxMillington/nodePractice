@@ -8,8 +8,14 @@ var express = require('express'),
     i18n = require('makara'),
     dustjs = require('adaro');
 
+var bodyParser = require('body-parser');
 
 var app = express();
+
+// configure body-parser to extract the POST form data
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.engine('dust', dustjs.dust({ cache: false }));
 app.engine('js', dustjs.js({ cache: false }));
@@ -24,7 +30,7 @@ app.set('view cache', false);
 // Decorate express app with localized template rendering capabilities using config object settings.
 i18n.create(app, config);
 
-// To-do:  Enter a require statement so that it uses 
+// TODO:  Enter a require statement so that it uses
 // the index.js file under the routes folder
   
 
