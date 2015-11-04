@@ -1,33 +1,33 @@
-<html>{~n}
-<head>{~n}
-<title>{@pre type="content" key="quiz.title"/}</title>{~n}
-</head>{~n}
-<body bgcolor=#ffffff>{~n}
-{~n}
-<h3>{quizName}</h3>{~n}
-{~n}
-<form name="{quizId}" method="post" action="{submitTo}" enctype="text/plain">{~n}
-{~n}
-<p>{intro}</p>{~n}
+<html>
+<head>
+<title>{@pre type="content" key="quiz.title"/}</title>
+</head>
+<body bgcolor=#ffffff>
+
+<h3>{quizName}</h3>
+
+<form name="{quizId}" method="post" action="{submitTo}">
+
+<p>{intro}</p>
 
 {#questions}
-<p>{@math key=$idx method="add" operand=1/}. {questionText}<br />{~n}
+<p>{@math key=$idx method="add" operand=1/}. {questionText}<br />
   {@eq key=answerType value="input"}
-    <textarea name="{id}" rows="4" cols="50"></textarea>{~n}
+    <textarea name="{id}" rows="4" cols="50"></textarea>
   {:else}
-    {#answers questionId=id answerTypeParam=answerType}
-      <input type="{@eq key=answerTypeParam value="single"}radio{:else}checkbox{/eq}" name="{questionId}"
-                 value="{id}" />{answerText}<br />{~n}
+    {#answers questionId=id}
+      <input type="{@eq key=answerType value="single"}radio{:else}checkbox{/eq}" name="{questionId}"
+                 value="{id}" />{answerText}<br />
     {/answers}
   {/eq}
-</p>{~n}
+</p>
 {:else}
-  <h4>You passed!</h4>{~n}
+  <h4>You passed!</h4>
 {/questions}
 
-<br />{~n}
-    <input type="submit" value="Send Form" />{~n}
-    <input type="reset" value="Clear Form" />{~n}
-</form>{~n}
-</body>{~n}
-</html>{~n}
+<br />
+    <input type="submit" value="Send Form" />
+    <input type="reset" value="Clear Form" />
+</form>
+</body>
+</html>
