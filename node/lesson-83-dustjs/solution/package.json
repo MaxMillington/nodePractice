@@ -2,6 +2,9 @@
   "name": "app",
   "version": "0.0.1",
   "main": "app",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "adaro": "^0.1.5",
     "body-parser": "^1.14.1",
