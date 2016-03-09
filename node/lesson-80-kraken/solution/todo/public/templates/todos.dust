@@ -19,8 +19,8 @@ Kraken Todos
     {?todos}
     {#todos}
     <div class="item">
-        <a href="/todos/{.id}" class="update-link" title="Update this todo item">{.content}
-            <a href="/todos/delete/{.id}" class="del-btn" title="Delete this todo item">Delete
+        <a href="/todos/{.id}" class="update-link" title="Update this todo item">{.content}</a>
+            <a href="/todos/delete/{.id}" class="del-btn" title="Delete this todo item">Delete</a>
     </div>
     {/todos}
     {:else}
@@ -31,7 +31,7 @@ Kraken Todos
             <input class="update-input" type="text" name="content" value="{.content}">
             <input type="hidden" name="_csrf" value="{_csrf}">
         </form>
-        <a href="/todos/delete/{.id}" class="del-btn" title="Delete this todo item">Delete
+        <a href="/todos/delete/{.id}" class="del-btn" title="Delete this todo item">Delete</a>
     </div>
     {/update_todo}
     {:else}
