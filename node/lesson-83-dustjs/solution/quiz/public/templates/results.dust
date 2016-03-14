@@ -1,0 +1,11 @@
+{>"layouts/master" /}
+
+{<body}
+
+<h3>These are the Assessment Results</h3>
+
+{#keys}
+Body.{.} = {body[.]} <br />
+{/keys}
+
+{/body}

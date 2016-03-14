@@ -1,0 +1,13 @@
+
+By default, Kraken does not include support for the default dust helpers.
+
+Modify the '/config/config.json' file, and add the "dustjs-helpers" to the dust configuration section.
+
+    "dust": {
+        "helpers": [
+
+            "dust-makara-helpers",
+            "dustjs-helpers"
+
+        ]
+    },

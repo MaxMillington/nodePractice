@@ -1,0 +1,31 @@
+{>"layouts/master" /}
+
+{<body}
+
+<h3>{quizName}</h3>
+
+<form name="{quizId}" method="post" action="{submitTo}">
+
+<p>{intro}</p>
+
+{#questions}
+<p>{@math key=$idx method="add" operand=1/}. {questionText}<br />
+  {@eq key=answerType value="input"}
+    <textarea name="{id}" rows="4" cols="50"></textarea>
+  {:else}
+    {#answers questionId=id}
+      <input type="{@eq key=answerType value="single"}radio{:else}checkbox{/eq}" name="{questionId}"
+                 value="{id}" />{answerText}<br />
+    {/answers}
+  {/eq}
+</p>
+{:else}
+  <h4>You passed!</h4>
+{/questions}
+
+<br />
+    <input type="hidden" name="_csrf" value="{_csrf}" />
+    <input type="submit" value="Send Form" />
+    <input type="reset" value="Clear Form" />
+</form>
+{/body}
