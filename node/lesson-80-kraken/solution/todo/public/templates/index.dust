@@ -6,4 +6,7 @@ Hello, World.
 
 {<body}
 <h1>{@pre type="content" key="greeting"/}</h1>
+
+<todos-list />
+
 {/body}
