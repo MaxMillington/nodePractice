@@ -14,59 +14,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(session({ resave: false, saveUninitialized: false, secret: 'super secret string' }));
 
-app.use(function login(req, res, next) {
-  if ('GET' !== req.method) {
-    return next();
-  }
+// configure the routes
 
-  if (req.session.user) {
-    res.setHeader('Content-Type', 'text/html');
-    res.write('Hello ' + req.session.user + '<br/><br/>');
-    res.write('<form method="post" action="/?_method=DELETE">');
-    res.write('<input type="submit" value="Logout" />');
-    res.write('</form>');
-    res.end();
-  } else {
-    res.setHeader('Content-Type', 'text/html');
-    res.write('Please log in <br/><br/>');
-    res.write('<form method="post">');
-    res.write('<input type="text" name="user" />');
-    res.write('<input type="password" name="password" />');
-    res.write('<input type="submit" value="Login" />');
-    res.write('</form>');
-    res.end();
-  }
+app.get('/', function(req, res) {
+  res.sendfile('./views/index.html');
 });
 
-app.use(function checkAuth(req, res, next) {
-  if ('POST' !== req.method) {
-    return next();
-  }
-
-  var credentialsSet = (req.body.user && req.body.password);
-  if (credentialsSet && (req.body.user === 'admin') && (req.body.password === 'password')) {
-    req.session.regenerate(function createSession(err) {
-      if (err) {
-        console.log(err);
-      }
-      req.session.user = req.body.user;
-      res.end("You are now logged in.");
-    });
-  } else {
-    res.end("Invalid credentials - go away");
-  }
+app.get('/login', function(req, res) {
+  res.sendfile('./views/login.html');
 });
 
-app.use(function logout(req, res) {
-  if ('DELETE' !== req.method) {
-    res.end("Unexpected server error!");
-  }
-  req.session.destroy(function logout(err) {
-    if (err) {
-      console.log(err);
-    }
-    res.end("Logged out!");
-  });
+app.get('/logout', function(req, res) {
+  res.sendfile('./views/index.html');
 });
 
-app.listen(3000);
+app.post('/login', function(req, res) {
+  var pageName = (req.body.username && req.body.password) ? './views/success.html' : './views/failure.html';
+  res.sendfile(pageName);
+});
+
+app.listen(3000, function() {
+  console.log('Listening on port, 3000');
+});

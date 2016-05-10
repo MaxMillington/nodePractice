@@ -1,5 +1,8 @@
 {
   "name": "express-auth",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "express": "4.6.0",
     "express-session": "1.6.5",
