@@ -88,7 +88,7 @@ fs.watch(dir, function onEvent(event, filename) {
           }
 
           var type;
-          _-
+
           if (stats.isFile()) {
             entries.files.push(filename);
             type = 'file';
