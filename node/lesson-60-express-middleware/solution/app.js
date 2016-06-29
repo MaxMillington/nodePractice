@@ -17,7 +17,8 @@ app.use(session({ resave: false, saveUninitialized: false, secret: 'super secret
 // configure the routes
 
 app.get('/', function(req, res) {
-  res.sendfile('./views/index.html');
+  var pageName = (req.session.user && req.session.user.name) ? './views/index.html' : './views/not_logged_in.html';
+  res.sendfile(pageName);
 });
 
 app.get('/login', function(req, res) {
@@ -25,12 +26,18 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/logout', function(req, res) {
-  res.sendfile('./views/index.html');
+  req.session.user = {};
+  res.redirect('/');
 });
 
 app.post('/login', function(req, res) {
-  var pageName = (req.body.username && req.body.password) ? './views/success.html' : './views/failure.html';
-  res.sendfile(pageName);
+  if ( req.body.username && req.body.password) {
+    req.session.user = { name: req.body.username };
+    res.sendfile('./views/success.html');
+  }
+  else {
+    res.sendfile('./views/failure.html');
+  }
 });
 
 app.listen(3000, function() {
