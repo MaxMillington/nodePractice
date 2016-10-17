@@ -13,7 +13,7 @@ function exists(callback) {
     callback(exists ? null : new Error('file does not exist!'));
   });
 }
-function read(callback) {
+function read(results, callback) {
   console.log('reading source file');
   fs.readFile(file, function onRead(err, contents) {
     if (err) {
@@ -32,7 +32,7 @@ function create(callback) {
     callback(null, fd);
   });
 }
-function write(callback, results) {
+function write(results, callback) {
   console.log('writing destination file');
   // TODO: replace with Buffer of string read in function read(callback)
   var buffer = null;
@@ -42,7 +42,7 @@ function write(callback, results) {
     callback(err);
   });
 }
-function close(callback, results) {
+function close(results, callback) {
   console.log('closing destination file');
   // TODO: close file whose descriptor was obtained in function create(callback)
 }

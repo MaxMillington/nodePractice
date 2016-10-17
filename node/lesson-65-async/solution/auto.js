@@ -12,7 +12,7 @@ function exists(callback) {
     callback(exists ? null : new Error('file does not exist!'));
   });
 }
-function read(callback) {
+function read(results, callback) {
   console.log('reading source file');
   fs.readFile(file, function onRead(err, contents) {
     if (err) {
@@ -31,14 +31,14 @@ function create(callback) {
     callback(null, fd);
   });
 }
-function write(callback, results) {
+function write(results, callback) {
   console.log('writing destination file');
   var buffer = new Buffer(results.read.join(' '));
   fs.write(results.create, buffer, 0, buffer.length, null, function onWrite(err) {
     callback(err);
   });
 }
-function close(callback, results) {
+function close(results, callback) {
   console.log('closing destination file');
   fs.close(results.create, function onClosed(err) {
     callback(err);

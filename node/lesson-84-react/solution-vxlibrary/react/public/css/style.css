@@ -1,0 +1,30 @@
+body {
+    padding: 0px 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.content {
+    width: 100%;
+    background-color: lightblue;
+    vertical-align: top;
+}
+
+.header, .footer {
+    background-color: cornflowerblue;
+    padding: 15px;
+}
+
+.middle, .nav {
+    vertical-align: top;
+    display: inline-block;
+    padding: 20px;
+}
+
+.nav {
+    border-right: 1px solid black;
+    height: 260px;
+}
+.formRow input, .formTextarea textarea {
+    margin-left: 20px;
+}
+

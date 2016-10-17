@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VX Library</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="/css/twbs-light.css">
+    <link rel="stylesheet" href="/css/paypal-sans.css">
+    <link rel="stylesheet" href="/css/vx-lib.css">
+</head>
+</head>
+<body className="vx_addFlowTransition" id="vx_header">
+<input type="checkbox" id="toggleNavigation" className="vx_globalNav-toggleCheckbox"/>
+
+<div className="vx_globalNav-main" role="banner">
+
+    <div className="vx_globalNav-container">
+        <a href="#" className="vx_globalNav-brand_desktop">
+            <span className="vx_a11yText">Summary</span>
+        </a>
+
+        <div className="vx_globalNav-secondaryNav_mobile">
+            <div className="vx_globalNav-listItem_mobileLogout">
+                <a href="#" className="vx_globalNav-link_mobileLogout">Log
+                    out</a></div>
+            <div className="vx_globalNav-listItem_settings">
+                <a href="#" className="vx_globalNav-link_settings">
+                    <span className="vx_globalNav-iconWrapper_secondary">
+                    <span className="vx_globalNav-navIcon vx_globalNav-navIcon_linkSettings">
+                    </span>
+                    </span>
+                    <span className="vx_a11yText">Profile</span>
+                </a>
+            </div>
+            <div>
+                <p className="vx_h5 vx_globalNav-displayName">John Doe</p>
+            </div>
+        </div>
+
+
+
+        <div className="vx_globalNav-navContainer">
+            <nav className="vx_globalNav-nav" role="navigation">
+
+                <ul className="vx_globalNav-list">
+                    <li>
+                        <a href="/index.html" className="vx_isActive vx_globalNav-links">Home</a>
+                    </li>
+                    <li>
+                        <a href="/exercises" className="vx_globalNav-links">Exercises</a>
+                    </li>
+                    <li>
+                        <a href="/vxlibrary" className="vx_globalNav-links">VX Library</a>
+                    </li>
+                </ul>
+
+                <ul className="vx_globalNav-list_secondary">
+
+                    <li className="vx_hidden-phone">
+                        <label htmlFor="toggleSidepanel" className="vx_globalNav-link_notifications vx_isCritical">
+
+                            <span className="vx_globalNav-iconWrapper_secondary">
+                                <span className="vx_globalNav-navIcon vx_globalNav-navIcon_linkNotifications"></span>
+                                <span className="vx_notificationCount">1</span>
+                            </span>
+                            <span className="vx_a11yText">Notifications</span>
+                        </label>
+                    </li>
+
+                    <li>
+                        <a href="#" className="vx_globalNav-link_settings">
+
+                            <span className="vx_globalNav-iconWrapper_secondary">
+                                <span className="vx_globalNav-navIcon vx_globalNav-navIcon_linkSettings"></span>
+                            </span>
+                            <span className="vx_a11yText">Profile</span>
+                        </a>
+                    </li>
+
+                    <li className="vx_globalNav-listItem_logout">
+                        <a href="#"
+                           className="vx_globalNav-link_logout">
+                            Log out
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div className="vx_foreground-container">
+
+    <div className="vx_globalNav-main_mobile">
+        <div className="vx_globalNav-headerSection_trigger">
+            <label className="vx_globalNav-toggleTrigger" htmlFor="toggleNavigation">Menu</label>
+        </div>
+        <div className="vx_globalNav-headerSection_logo">
+            <a href="#" className="vx_globalNav-brand_mobile">
+                <span className="vx_a11yText">Summary</span>
+            </a>
+        </div>
+        <ul className="vx_globalNav-headerSection_actions">
+            <li className="vx_globalNav-actionItem_mobile vx_globalNav-notificationItem_mobile">
+                <a className="vx_globalNav-link_notifications vx_isCritical">
+                    <span className="vx_globalNav-iconWrapper_secondary">
+                        <span className="vx_globalNav-navIcon vx_globalNav-navIcon_linkNotifications">
+
+                        </span>
+                        <span className="vx_notificationCount">1</span>
+                    </span>
+                    <span className="vx_a11yText">Notifications</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div className="vx_mainContent">
+        <p>
+            // This is the content of the page
+        </p>
+
+        <div>
+
+            <button className="vx_btn btn vx_modal-trigger" data-modal-id="myModal">
+                Open my Modal
+            </button>
+        </div>
+
+    </div>
+
+    <div className="vx_globalFooter">
+
+        <div className="vx_globalFooter-content">
+
+            <ul className="vx_globalFooter-list">
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="/security">Security</a></li>
+            </ul>
+
+            <div className="vx_globalFooter_secondary">
+
+                <p className="vx_globalFooter-copyright">
+                    ©1999-2016 PayPal, Inc. All rights reserved.
+                </p>
+                <ul className="vx_globalFooter-list_secondary">
+                    <li href="#">Privacy</li>
+                    <li href="#">Feedback</li>
+                </ul>
+            </div>
+            <p className="vx_globalFooter-disclaimer">
+                This is the bottom disclaimer
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div className="vx_modal-glimpse" id="myModal">
+    <div className="vx_modal-wrapper">
+        <button className="vx_modal-dismiss_x-trigger" data-modal-id="myModal"><span
+            className="vx_a11yText">Close</span></button>
+        <div className="vx_modal-content">
+            <header className="vx_modal-header"><h2>This is a
+                header</h2></header>
+            <div className="vx_modal-body">
+                <p>
+                    This is the Modal content.
+                </p>
+
+                <p>
+                    Notice that the view of the modal changes based on the width of the screen. Change the width and see
+                    the difference.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/vx-lib.js"></script>
+</body>
+</html>
