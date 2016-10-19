@@ -25,11 +25,11 @@ var Nav = React.createClass({
         return (
             <div className="nav">
                 <h1>Nav</h1>
-                <Link to='/first'>First</Link><br />
-                <Link to='/second'>Second</Link><br />
-                <Link to='/third'>Third</Link><br />
-                <Link to='/fourth'>Fourth</Link><br />
-                <Link to='/profile'>Profile</Link><br />
+                <Link to='/page1'>First</Link><br />
+                <Link to='/page2'>Second</Link><br />
+                <Link to='/page3'>Third</Link><br />
+                <Link to='/page4'>Fourth</Link><br />
+                <a href='/profile'>Profile</a><br />
             </div>
         );
     }

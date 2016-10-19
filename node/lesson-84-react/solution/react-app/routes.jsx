@@ -8,19 +8,19 @@ var IndexRoute = ReactRouter.IndexRoute;
 
 var Layout = require('./public/views/layout.jsx');
 var Home = require('./public/views/home.jsx');
-var First = require('./public/views/first.jsx');
-var Second = require('./public/views/second.jsx');
-var Third = require('./public/views/third.jsx');
-var Fourth = require('./public/views/fourth.jsx');
+var Page1 = require('./public/views/page1.jsx');
+var Page2 = require('./public/views/page2.jsx');
+var Page3 = require('./public/views/page3.jsx');
+var Page4 = require('./public/views/page4.jsx');
 
 var routes = module.exports = (
     <Router>
         <Route path='/' component={Layout}>
             <IndexRoute component={Home} />
-            <Route path='/first' component={First} />
-            <Route path='/second' component={Second} />
-            <Route path='/third' component={Third} />
-            <Route path='/fourth' component={Fourth} />
+            <Route path='/page1' component={Page1} />
+            <Route path='/page2' component={Page2} />
+            <Route path='/page3' component={Page3} />
+            <Route path='/page4' component={Page4} />
         </Route>
     </Router>
 );

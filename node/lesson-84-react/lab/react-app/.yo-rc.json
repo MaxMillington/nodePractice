@@ -1,0 +1,14 @@
+{
+  "generator-kraken": {
+    "taskModule": "grunt",
+    "lintModule": "eslint",
+    "description": "This is a Kraken React app",
+    "author": "clay boyd",
+    "templateModule": false,
+    "i18n": "i18n",
+    "componentPackager": false,
+    "cssModule": "less",
+    "jsModule": "browserify",
+    "useJson": null
+  }
+}
