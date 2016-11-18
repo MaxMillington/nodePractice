@@ -6,42 +6,42 @@ var fs = require('fs');
 
 var file = 'auto.js';
 
-function exists(callback) {
+function exists(done) {
   console.log('checking source file existence');
   fs.exists(file, function onExists(exists) {
-    callback(exists ? null : new Error('file does not exist!'));
+    done(exists ? null : new Error('file does not exist!'));
   });
 }
-function read(results, callback) {
+function read(results, done) {
   console.log('reading source file');
   fs.readFile(file, function onRead(err, contents) {
     if (err) {
-      return callback(err);
+      return done(err);
     }
     contents = contents.toString().split(/\s+/);
-    callback(null, contents);
+    done(null, contents);
   });
 }
-function create(callback) {
+function create(done) {
   console.log('creating destination file');
   fs.open('auto.pseudomin.js', 'w', function onOpen(err, fd) {
     if (err) {
-      return callback(err);
+      return done(err);
     }
-    callback(null, fd);
+    done(null, fd);
   });
 }
-function write(results, callback) {
+function write(results, done) {
   console.log('writing destination file');
   var buffer = new Buffer(results.read.join(' '));
   fs.write(results.create, buffer, 0, buffer.length, null, function onWrite(err) {
-    callback(err);
+    done(err);
   });
 }
-function close(results, callback) {
+function close(results, done) {
   console.log('closing destination file');
   fs.close(results.create, function onClosed(err) {
-    callback(err);
+    done(err);
   });
 }
 
