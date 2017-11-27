@@ -4,10 +4,10 @@
 
 3.	Win64OpenSSL-1_0_1m is available in the following box file https://paypal.box.com/s/ggd99xt0rttzgdx9vsye095gac3vt9p6
 
-3.	Win64OpenSSL-1_0_1m.exe has to be installed .Please install It in C:\OpenSSL-Win64
+4.	Win64OpenSSL-1_0_1m.exe has to be installed .Please install It in C:\OpenSSL-Win64
 
-4.	Also set path to C:\OpenSSL-Win64;C:\OpenSSL-Win64\bin;C:\OpenSSL-Win64\include
+5.	Also set path to C:\OpenSSL-Win64;C:\OpenSSL-Win64\bin;C:\OpenSSL-Win64\include
 
-5.  upgrade npm run the command npm install -g npm
+6.  upgrade npm run the command npm install -g npm
 
-6.	Finally run npm install bignum in command prompt make sure it runs without any errors
+7.	Finally run npm install bignum in command prompt make sure it runs without any errors
