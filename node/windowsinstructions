@@ -1,4 +1,4 @@
-1.	Install Node.js v4.7.1 from https://nodejs.org/en/download/releases/ for 64 bit windows OS
+1.	Install Node.js v6.11.1 from https://nodejs.org/en/download/releases/ for 64 bit windows OS
 
 2.  npm install --global --production windows-build-tools
 
