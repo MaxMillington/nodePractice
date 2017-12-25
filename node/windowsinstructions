@@ -1,13 +1,13 @@
-1.	Install Node.js v4.4.7 from https://nodejs.org/en/download/releases/
+1.	Install Node.js v6.11.1 from https://nodejs.org/en/download/releases/ for 64 bit windows OS
 
-2.  Install Visual Studio Community Edition from https://www.visualstudio.com/downloads/
+2.  npm install --global --production windows-build-tools
 
-2.	The python 2.7 and Win64OpenSSL-1_0_1m are available in the following box file https://paypal.box.com/s/ggd99xt0rttzgdx9vsye095gac3vt9p6
+3.	Win64OpenSSL-1_0_1m is available in the following box file https://paypal.box.com/s/ggd99xt0rttzgdx9vsye095gac3vt9p6
 
-3.	Win64OpenSSL-1_0_1m.exe has to be installed .Please install It in C:\OpenSSL-Win64
+4.	Win64OpenSSL-1_0_1m.exe has to be installed .Please install It in C:\OpenSSL-Win64
 
-4.	Also set path to C:\OpenSSL-Win64;C:\OpenSSL-Win64\bin;C:\OpenSSL-Win64\include
+5.	Also set path to C:\OpenSSL-Win64;C:\OpenSSL-Win64\bin;C:\OpenSSL-Win64\include
 
-5.	For some machines it is asking for directory name openssl (it did not asked in my machine)
+6.  upgrade npm run the command npm install -g npm
 
-6.	Finally run npm install bignum in command prompt make sure it runs without any errors
+7.	Finally run npm install bignum in command prompt make sure it runs without any errors
