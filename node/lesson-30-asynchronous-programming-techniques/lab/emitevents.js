@@ -4,8 +4,11 @@ var eventEmitter = require('events').EventEmitter;
 var util = require('util');
 
 function BasicEmitter() {
-        this.emit('start');
-        this.emit('data', 'somedata');
+  var self = this
+  process.nextTick(function startIt() {
+    self.emit('start');
+  });
+  this.emit('data', 'somedata');
 }
 // BasicEmitter inherits from EventEmitter
 util.inherits(BasicEmitter, eventEmitter);

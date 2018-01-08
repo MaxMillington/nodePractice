@@ -6,10 +6,13 @@ function FileThing() {
 
   this.exists = function exists(cb) {
     console.log('Opening: ' + this.name);
+
+    var self = this
+
     fs.open(this.name, 'r', function onOpened(err, fd) {
       if (err) {
         if (err.code === 'ENOENT') { // then file didn't exist
-          console.log('Failed opening file: ' + this.name);
+          console.log('Failed opening file: ' + self.name);
           return cb(null, false);
         }
         // then there was some other error
@@ -24,6 +27,7 @@ function FileThing() {
 var f = new FileThing();
 f.name = 'thisFileDoesNotExist';
 f.exists(function onExists(err, exists) {
+  var self = this
   if (err) {
     return console.log('ERROR! ' + err);
   }
