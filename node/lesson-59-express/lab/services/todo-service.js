@@ -15,19 +15,40 @@ module.exports = function module(todos) {
 
   return {
     findAll : function findAll(callback) {
-      // TODO
+      callback(null, todos)
     },
 
     addTodo : function addTodo(content, callback) {
-      // TODO
+      var todo = {
+        id : uuid(),
+        content : content
+      };
+
+      todos.push(todo)
+
+      callback(null, todo)
     },
 
     updateTodo : function updateTodo(id, content, callback) {
-      // TODO
+      var todo = todos.find(function(todo) { return todo.id === id })
+
+      if (todo) {
+        todo.content = content
+        return callback()
+      } else {
+        callback(new Error('todo with id ' + id + ' not found.'));
+      }
     },
 
     deleteTodo : function deleteTodo(id, callback) {
-      // TODO
+      var index = todos.findIndex(function(element) { return element.id === id })
+
+      if (index > -1) {
+        todos.splice(index, 1);
+        return callback();
+      } else {
+        callback(new Error('todo with id ' + id + ' not found.'));
+      }
     }
   };
 };
