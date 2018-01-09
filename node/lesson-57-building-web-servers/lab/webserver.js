@@ -64,9 +64,9 @@ function getBody(request, callback) {
 //
 
 server = http.createServer(function (request, response) {
-        var params = {};        // TODO: use url.parse() to get the params
-        var method = 'GET';     // TODO: get the real method from the request
-        var path = '/';         // TODO: get the real pathname from the params
+        var params = url.parse(request.url, true);        // TODO: use url.parse() to get the params
+        var method = request.method;     // TODO: get the real method from the request
+        var path = params.pathname;         // TODO: get the real pathname from the params
         var body = {};
         console.log('Method = ' + method + ', path = ' + path);
 
@@ -75,9 +75,11 @@ server = http.createServer(function (request, response) {
                 case '/':
                     render(response, 'index.html');
                     break;
-
-                // TODO: add the other paths for GET
-
+                case '/login':
+                    render(response, 'login.html');
+                    break;
+                case '/logout':
+                    render(response, 'index.html');
                 default:
                     response.writeHead(500);
                     response.end("GET: Unknown path: " + path);
@@ -91,9 +93,12 @@ server = http.createServer(function (request, response) {
 
                 switch (path) {
                     case '/login':
-                        // TODO: add the logic for the POST /login
-                        // TODO: verify that the body contains a username and a password
-                        // TODO: change the rendered file based on the correct input
+                        if (body && body.username && body.password) {
+                          render(response, 'success.html');
+                        }
+                        else {
+                          render(response, 'failure.html')
+                        }
                         break;
                     default:
                         response.writeHead(500);
