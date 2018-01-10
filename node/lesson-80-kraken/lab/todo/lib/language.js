@@ -1,0 +1,16 @@
+'use strict';
+
+module.exports = function () {
+
+  return function (req, res, next) {
+    //Pick up the language cookie.
+    var language = req.cookies.language;
+    
+    //Set the locality for this response. The template will pick the appropriate bundle
+    if (language) {
+      res.locals.locality = language;
+    }
+
+    next();
+  };
+};

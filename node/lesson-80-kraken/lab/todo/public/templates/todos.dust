@@ -1,0 +1,40 @@
+{>"layouts/master" /}
+
+{<title}
+    Kraken Todos
+{/title}
+
+{<body}
+  <h1 id="page-title">Unleash the Kraken!</h1>
+  <div id="list">
+    <form method="POST" action="/todos">
+      <div class="item-new">
+        <input type="text" name="content" class="input">
+        <input type="hidden" name="_csrf" value="{_csrf}">
+      </div>
+    </form>
+    {?todos}
+      {#todos}
+        <div class="item">
+          <a href="/todos/{.id}" class="update-link" title="Update this todo item">{.content}</a>
+          <a href="/todos/delete/{.id}" class="del-btn" title="Delete this todo item">Delete</a>
+        </div>
+      {/todos}
+    {:else}
+      {?update_todo}
+        {#update_todo}
+          <div class="item-new">
+            <form class="update-form" action="/todos/{.id}" method="POST">
+              <input class="update-input" type="text" name="content" value="{.content}">
+              <input type="hidden" name="_csrf" value="{_csrf}">
+            </form>
+            <a href="/todos/delete/{.id}" class="del-btn" title="Delete this todo item">Delete</a>
+          </div>
+        {/update_todo}
+      {:else}
+        No todo items yet!
+      {/update_todo}
+    {/todos}
+  </div>
+{/body}
+

@@ -19,6 +19,7 @@
         "express": "^4.12.2",
         "kraken-js": "^2.0.0",
         "makara": "^2.0.3",
+        "mongoose": "3.8.12",
         "requirejs": "^2.3.5"
     },
     "devDependencies": {
