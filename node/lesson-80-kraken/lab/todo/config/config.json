@@ -47,6 +47,13 @@
 
     "middleware": {
 
+        "language": {
+            "priority": 95,
+            "enabled": true,
+            "module": {
+                "name": "path:./lib/language"
+            }
+        },
 
         "makara": {
             "priority": 100,

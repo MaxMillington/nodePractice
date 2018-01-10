@@ -5,7 +5,10 @@
 {/title}
 
 {<body}
-  <h1 id="page-title">Unleash the Kraken!</h1>
+ <p>Select language:</p>
+  <p><a href="/setLanguage/en-us" alt="English">English</a><br/>
+  <a href="/setLanguage/es-es" alt="Spanish">Spanish</a></p>
+  <h1 id="page-title">{@pre type="content" key="greeting"/}</h1>
   <div id="list">
     <form method="POST" action="/todos">
       <div class="item-new">
