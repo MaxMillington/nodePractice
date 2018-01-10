@@ -9,17 +9,34 @@ var morgan = require('morgan');
 var LOGGER = ':remote-addr - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" REQUEST-COOKIE:req[Cookie] RESPONSE-COOKIE:res[Cookie]';
 
 var app = express();
+app.use(morgan(LOGGER));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({ resave: false, saveUninitialized: false, secret: 'super secret string' }));
+app.use(methodOverride('_method'));
 
-// configure body-parser
+app.get('/', function(req, res) {
+  var pageName = (req.session.user && req.session.user.name) ? './views/index.html' : './views/not_logged_in.html';
+  res.sendfile(pageName);
+});
 
-// configure morgan
+app.get('/login', function(req, res) {
+  res.sendfile('./views/login.html');
+});
 
-// configure methodOverride
+app.get('/logout', function(req, res) {
+  req.session.user = {};
+  res.redirect('/');
+});
 
-// configure session
-
-// configure the routes
-// use res.sendfile('filename') to send the files to the browser
+app.post('/login', function(req, res) {
+  if ( req.body.username && req.body.password) {
+    req.session.user = { name: req.body.username };
+    res.sendfile('./views/success.html');
+  }
+  else {
+    res.sendfile('./views/failure.html');
+  }
+});
 
 app.listen(3000, function() {
     console.log('Listening on port 3000');

@@ -34,7 +34,7 @@ function create(done) {
 function write(results, done) {
   console.log('writing destination file');
   // TODO: replace with Buffer of string read in function read(done)
-  var buffer = null;
+  var buffer = new Buffer(results.read.join(' '));
   // TODO: replace fd with the file descriptor returned by create(done)
   var fd = null;
   fs.write(fd, buffer, 0, buffer.length, null, function onWrite(err) {
@@ -43,10 +43,23 @@ function write(results, done) {
 }
 function close(results, done) {
   console.log('closing destination file');
-  // TODO: close file whose descriptor was obtained in function create(done)
+  fs.close(results.create, function onClosed(err) {
+    done(err);
+  });
 }
 
 // TODO: create tasks object for async.auto call
-var tasks = {};
+var tasks = {
+  exists : exists,
+  create : create,
+  read : [ 'exists', read ],
+  write : [ 'read', 'create', write ],
+  close : [ 'write', close ]
+};
 
-// TODO: call async.auto with tasks
+async.auto(tasks, function onDone(err, result) {
+  if (err) {
+    return console.log('error: ' + JSON.stringify(err));
+  }
+  console.log('file ' + file + ' minified ok as ' + file + '.min');
+});
